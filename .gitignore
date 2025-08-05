@@ -1,0 +1,43 @@
+# Logs e temporários
+*.log
+*.tmp
+*.swp
+
+# Sistemas operacionais
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Arquivos compilados
+*.class
+*.pyc
+*.o
+*.exe
+*.out
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+
+# Android/Kotlin
+*.iml
+.gradle/
+*.apk
+*.keystore
+build/
+
+# React/Expo
+.expo/
+.env
+
+# Arquivos sensíveis (recomendo manter seus .env locais fora do repo)
+*.env
