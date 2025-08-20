@@ -1,15 +1,15 @@
 # Modelos Lógicos de Dados
 
-Um modelo lógico de dados detalha a estrutura dos dados de um sistema, especificando entidades, atributos, relacionamentos e restrições, sem considerar aspectos físicos de armazenamento. Ele serve como base para a implementação do banco de dados, facilitando o entendimento e o desenvolvimento do sistema.
+Um modelo lógico de dados descreve detalhadamente a estrutura das informações de um sistema, especificando entidades, atributos, relacionamentos e restrições, sem abordar aspectos físicos de armazenamento. Ele serve como referência para a implementação do banco de dados, facilitando o entendimento e o desenvolvimento do sistema.
 
-Uma característica essencial de um modelo de dados é **evitar redundância**: cada dado ou atributo deve aparecer apenas uma vez no modelo. O modelo precisa ser claro e compreensível para seus usuários.
+Uma característica fundamental do modelo lógico é **evitar redundância**: cada dado ou atributo deve aparecer apenas uma vez. O modelo precisa ser claro, padronizado e compreensível para todos os envolvidos.
 
 ---
 
 ## Entidade
 
 - Representa um objeto ou conceito do mundo real, com existência independente (instâncias ou tuplas).
-- **Regras para nomeação:**
+- **Regras de nomeação:**
   - Letras maiúsculas
   - Apenas substantivos
   - Sem preposições ou conjunções
@@ -45,8 +45,7 @@ Uma característica essencial de um modelo de dados é **evitar redundância**: 
 
 ## Atributo
 
-- Propriedade ou característica de uma entidade.
-- Associado a uma entidade e armazenado no sistema.
+- Propriedade ou característica de uma entidade, associada e armazenada no sistema.
 
 ---
 
@@ -205,14 +204,179 @@ Modalidade (ou participação mínima) define o número mínimo de ocorrências 
   - Otimização de consultas: uso de índices e planos de execução para melhorar a performance.
   - Suporte a transações: garantia de operações atômicas, consistentes, isoladas e duráveis (ACID).
 
-## Linguagem de modelagem
+## Linguagem de Modelagem
 
-É utilizada para construir um modelo de dados, podendo ser apresentada de forma textual ou gráfica. Um modelo de dados pode ser representado de várias formas, conhecidas como "esquema de banco de dados". O modelo deve respeitar o nível de conhecimento dos usuários que irá atender. Para o usuário final, o modelo não deve conter detalhes técnicos de implementação, que são necessários apenas para usuários mais avançados do sistema.
+Utilizada para construir um modelo de dados, pode ser apresentada de forma **textual** ou **gráfica**. Um modelo de dados pode ser representado de várias formas, conhecidas como "esquema de banco de dados". O modelo deve respeitar o nível de conhecimento dos usuários que irá atender. Para o usuário final, o modelo não deve conter detalhes técnicos de implementação, que são necessários apenas para usuários mais avançados do sistema.
 
-## Banco de dados
+## Banco de Dados
 
-É um conjunto de registros (dados) organizados em tabelas, permitindo o armazenamento e a produção de informações. Um banco de dados normalmente agrupa registros com o mesmo objetivo e é mantido e acessado por meio de um software chamado SGBD, que auxilia na administração das bases de dados.
+Conjunto de registros (dados) organizados em tabelas, permitindo o armazenamento e a produção de informações. Um banco de dados normalmente agrupa registros com o mesmo objetivo e é mantido e acessado por meio de um software chamado **SGBD** (Sistema de Gerenciamento de Banco de Dados), que auxilia na administração das bases de dados.
 
-## Modelo de dados
+## Modelo de Dados
 
-É uma descrição dos tipos de informações que estão armazenadas em um banco de dados.
+Descrição dos tipos de informações que estão armazenadas em um banco de dados.
+
+## Modelo Conceitual
+
+Registra **que dados podem aparecer** no banco de dados, mas **não registra como esses dados estão armazenados** em nível de SGBD. A técnica mais difundida de modelagem conceitual é a abordagem **Entidade-Relacionamento (ER)**. Um modelo conceitual é representado através de um diagrama, chamado **Diagrama Entidade-Relacionamento (DER)**.
+
+### Características:
+- **Independente de tecnologia**
+- **Focado no negócio**
+- **Representação gráfica através do DER**
+
+### Componentes principais:
+- **Entidades**
+- **Atributos** 
+- **Relacionamentos**
+
+> **Nota importante:** Toda chave primária é, necessariamente, uma superchave.
+
+**Exemplo:**
+
+## Modelo Lógico
+
+É uma representação lógica das informações da área de negócios. **Não é um banco de dados**, é independente do modelo físico. Este é o conceito chave da modelagem de dados lógicos: ele deve ser **independente da tecnologia implementada**. Os componentes desse modelo devem estar intimamente ligados aos negócios, não à tecnologia.
+
+### Características:
+- **Ser completamente normalizado**
+- **Conter descrição sucinta** das entidades, atributos e relacionamentos
+- **Independente de SGBD específico**
+- **Foco na estrutura lógica dos dados**
+
+**Exemplo:**
+
+## Modelo Físico
+
+No modelo físico fazemos a **modelagem física** do modelo de banco de dados. Levam-se em conta as limitações impostas pelo SGBD escolhido e deve ser criado sempre com base nos exemplos de modelagem de dados produzidos no item anterior (modelo lógico).
+
+### Características:
+- **Dependente do SGBD escolhido**
+- **Considera limitações técnicas**
+- **Implementação real do banco**
+- **Otimizações específicas da plataforma**
+
+**Exemplo:**
+
+
+# Relacionamentos 
+
+## Relacionamento 1:1 (Um para Um)
+
+Um relacionamento de um para um existe entre duas tabelas (entidades) quando um único registro da primeira tabela está relacionado a um único registro da segunda tabela e vice-versa. São bastante difíceis de serem caracterizados, pois qualquer mudança de interpretação ou versão pode fazer com que facilmente eles sejam questionados e até reconsiderados.
+
+### Características:
+- **Raridade:** Relacionamentos 1:1 são pouco comuns
+- **Complexidade:** Difícil de manter e validar
+- **Flexibilidade:** Podem ser questionados facilmente
+
+### Implementação:
+No relacionamento do tipo 1:1, quem determina qual é a entidade forte (pai) é o **administrador de dados**. Então a chave primária (Primary Key - PK) desta entidade é copiada para a entidade fraca (filho) como atributo estrangeiro (Foreign Key - FK).
+
+**Exemplo:**
+```
+┌─────────────────┐         ┌─────────────────┐
+│    FUNCIONÁRIO  │   1:1   │   DEPARTAMENTO  │
+├─────────────────┤         ├─────────────────┤
+│ • ID_FUNC (PK)  │◄────────│ • ID_DEPT (PK)  │
+│ • Nome          │         │ • Nome          │
+│ • Cargo         │         │ • Localização   │
+│ • ID_DEPT (FK)  │         └─────────────────┘
+└─────────────────┘
+```
+
+## Relacionamento 1:N (Um para Muitos)
+
+Gera um atributo estrangeiro que é o elo de ligação entre duas instâncias. É sua existência que indica que há um relacionamento da instância de um objeto com outra instância de outro objeto, ou de maneira simples, indica que há um relacionamento entre dois objetos. O objeto dependente (filho) herda a chave do objeto de origem (pai) como atributo estrangeiro.
+
+### Características:
+- **Mais comum:** Relacionamento mais frequente
+- **Navegação:** Criação do FK no objeto destino
+- **Hierarquia:** Objeto pai → Objeto filho
+
+### Implementação:
+Chamamos de **navegação** no modelo de dados a criação do atributo estrangeiro (FK) no objeto destino, baseado na chave primária do objeto de origem.
+
+> **Nota importante:** No relacionamento de 1:N, a entidade que está com "1" é o pai.
+
+**Exemplo:**
+```
+┌─────────────────┐         ┌─────────────────┐
+│    CLIENTE      │   1:N   │     PEDIDO      │
+├─────────────────┤         ├─────────────────┤
+│ • CPF (PK)      │◄────────│ • ID_PEDIDO (PK)│
+│ • Nome          │         │ • Data          │
+│ • Email         │         │ • Valor         │
+│ • Telefone      │         │ • CPF_FK (FK)   │
+└─────────────────┘         └─────────────────┘
+```
+
+## Relacionamento N:N (Muitos para Muitos)
+
+Esta cardinalidade **não gera atributos ou chaves estrangeiras** diretamente, mas é necessário haver a navegação. É possível a resolução deste relacionamento. Este tipo de relacionamento **desaparece** e em seu lugar surge um **objeto de resolução**.
+
+### Características:
+- **Complexidade:** Requer tabela intermediária
+- **Resolução:** Sempre precisa ser resolvido
+- **Flexibilidade:** Permite múltiplas associações
+
+### Processo de Resolução:
+
+1. **Identificação:** O relacionamento N:N é identificado
+2. **Criação da Tabela Intermediária:** Surge uma nova entidade
+3. **Movimentação das Cardinalidades:** Os objetos-pai passam a ter cardinalidade mínima e máxima de 1
+4. **Criação das Chaves Estrangeiras:** Na tabela intermediária
+
+### Exemplo Prático: Alunos e Disciplinas
+
+**Antes da Resolução (N:N):**
+```
+┌─────────────────┐    N:N   ┌─────────────────┐
+│     ALUNO       │◄────────►│   DISCIPLINA    │
+├─────────────────┤          ├─────────────────┤
+│ • ID_ALUNO (PK) │          │ • ID_DISC (PK)  │
+│ • Nome          │          │ • Nome          │
+│ • Email         │          │ • Carga_Horária │
+└─────────────────┘          └─────────────────┘
+```
+
+**Após a Resolução (1:N + N:1):**
+```
+┌─────────────────┐    1:N   ┌─────────────────┐   N:1   ┌─────────────────┐
+│     ALUNO       │◄─────────│  MATRICULA      │────────►│   DISCIPLINA    │
+├─────────────────┤          ├─────────────────┤         ├─────────────────┤
+│ • ID_ALUNO (PK) │          │ • ID_MAT (PK)   │         │ • ID_DISC (PK)  │
+│ • Nome          │          │ • ID_ALUNO (FK) │         │ • Nome          │
+│ • Email         │          │ • ID_DISC (FK)  │         │ • Carga_Horária │
+└─────────────────┘          │ • Data_Mat      │         └─────────────────┘
+                             │ • Nota          │
+                             └─────────────────┘
+```
+
+### Outro Exemplo: Produtos e Fornecedores
+
+**Tabela Intermediária: FORNECIMENTO**
+```
+┌─────────────────┐    1:N   ┌─────────────────┐   N:1   ┌─────────────────┐
+│   FORNECEDOR    │◄─────────│  FORNECIMENTO   │────────►│    PRODUTO      │
+├─────────────────┤          ├─────────────────┤         ├─────────────────┤
+│ • ID_FORN (PK)  │          │ • ID_FORN (FK)  │         │ • ID_PROD (PK)  │
+│ • Nome          │          │ • ID_PROD (FK)  │         │ • Nome          │
+│ • CNPJ          │          │ • Preço         │         │ • Descrição     │
+│ • Telefone      │          │ • Data_Contrato │         │ • Categoria     │
+└─────────────────┘          └─────────────────┘         └─────────────────┘
+```
+
+### Vantagens da Resolução N:N:
+
+1. **Flexibilidade:** Permite múltiplas associações
+2. **Dados Adicionais:** Pode armazenar informações do relacionamento
+3. **Normalização:** Mantém a integridade dos dados
+4. **Consultas Eficientes:** Facilita operações de busca
+
+### Regras Importantes:
+
+- ✅ **Sempre resolver** relacionamentos N:N
+- ✅ **Criar tabela intermediária** com FK para ambas as entidades
+- ✅ **Considerar dados adicionais** do relacionamento
+- ✅ **Manter integridade referencial**
