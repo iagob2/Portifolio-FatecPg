@@ -488,3 +488,34 @@ COMMIT;
 - **Facilidade de aprendizado**
 - **Portabilidade** entre diferentes SGBDs
 - **Flexibilidade** para consultas complexas      
+
+## tipo de dados: 
+
+- **CHAR:** alfanumérico de tamnho fixo 255 max 
+- **VARCHAR:** alfanumérico . o que não foi utilizado não ocupa espaço no banco de dados 2000 max 
+- **NUMBER( ):** Numérico . utilizado com casas decimas , primeiro o número total de digitos (inculindo as casas decimais) 38
+- **LONG:** alfanumérico. tamanho não precisa ser informando só pode existir um por tabela e não pode ser utilizado em consultas 26
+- **RAW:** armazena valores hexadecimais  com tamanho variável 2k ps armazenas imagens 
+- **LONG RAW :** armazena valores hexadecimais com tamanhos váriveis. 2G ps aramzana imagens 
+- **DATE:** serão armazenados com século , ano, mês , dia , hora , minuto e segundo 
+- **TIMESTAMP:** armazena , data , hora , minuto , segundo. 
+- **BLOB:** dados binários (1,0)
+- **BFILE:** dados binários armazenados em uma arquivos externo 
+- **ROWID:** um sistema numérico de base 64 que representa o endereço exclusivo de uma linha na tabela correspondente. 
+- **INTERVAL YEAR TO MONTH:** armazena um periodo usando os campos de data/hora year e month 
+- **INTERVAL DAY TO SECOND:** armazena um periodo em termos de dias , horas , minutos e segundos. 
+- **INTEGER::** Números inteiros não aceita limitação de tamanho do campo 38 digitos 
+
+## obs
+
+- **CREATE TABLE :** para criar um tabela no banco 
+
+- **CONSTRAINTS:** restrições são regras para o preenchimneto de uma ou mais colunas da tabelas e são definidas ao final da especificação de cada coluna ou no final do comando toda restriçõa possui um nome que pode ser definido pelo usuário por meio da opção constraint, caso contrário receberá um nome padronizado 
+
+- **DEFAULT:**  informar um valor padrão , mesmo quando não for fornecido pelo usuario 
+
+- **CHECK:** define um conjunto de valores permitidos ou condição para inserção de valores em um determinada coluna 
+
+- **NOT NULL:** indica que é obrigatoria a inserção de alguma coisa 
+
+- **inforamções sobre restrições:** as informações das restrições ficam aramzenadas em uma tabela de controle , atualizada automaticamente esta tabela é chamada de USer_constraints 
