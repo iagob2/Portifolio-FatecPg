@@ -8,9 +8,25 @@ No modelo conceitual, os relacionamentos entre entidades são definidos de forma
 
 Cardinalidade indica o número máximo de ocorrências de uma entidade que pode estar associada a outra em um relacionamento. Por exemplo, um departamento pode ter vários funcionários, mas cada funcionário pertence a apenas um departamento.
 
+**Exemplo:**
+```
+DEPARTAMENTO (1) ─────────── (N) FUNCIONARIO
+
+Um departamento pode ter N funcionários
+Um funcionário pertence a apenas 1 departamento
+```
+
 ## Modalidade
 
 Modalidade (ou participação mínima) define o número mínimo de ocorrências de uma entidade em um relacionamento. Por exemplo, um funcionário pode ou não estar associado a um projeto, indicando modalidade mínima zero.
+
+**Exemplo:**
+```
+FUNCIONARIO (0,N) ─────────── (1,1) PROJETO
+
+(0,N) → Funcionário pode não estar em nenhum projeto (mínimo 0) ou em vários (máximo N)
+(1,1) → Projeto deve ter no mínimo 1 e no máximo 1 gerente
+```
 
 ## Combinações possíveis
 
@@ -25,10 +41,6 @@ Modalidade (ou participação mínima) define o número mínimo de ocorrências 
 - **Modelo Conceitual:** Foca na estrutura e nas regras de negócio, sem detalhes técnicos. Utiliza diagramas como MER (Modelo Entidade-Relacionamento) para representar entidades, atributos e relacionamentos. É independente de qualquer tecnologia ou SGBD, facilitando o entendimento entre todas as partes envolvidas no projeto.
 - **Modelo Lógico:** Traduz o modelo conceitual para uma estrutura mais detalhada, já considerando restrições de integridade, tipos de dados, relacionamentos e normalização. O modelo lógico é específico para um tipo de SGBD, mas ainda não aborda detalhes de implementação física, como índices ou partições.
 - **Modelo Físico:** Define como os dados serão armazenados no SGBD escolhido, incluindo tabelas, índices, tipos de dados específicos, partições, métodos de acesso, performance e segurança. O modelo físico considera limitações e características do hardware e do software, sendo fundamental para a implementação eficiente do banco de dados.
-
-#### Exemplo ilustrativo
-
-![Exemplo de modelos de dados](https://raw.githubusercontent.com/microsoft/PowerPlatformConnectors/master/docs/images/data-models-example.png)
 
 | Modelo           | Representação                                                                                      |
 |------------------|---------------------------------------------------------------------------------------------------|
@@ -53,13 +65,42 @@ Modalidade (ou participação mínima) define o número mínimo de ocorrências 
 
 Utilizada para construir um modelo de dados, pode ser apresentada de forma **textual** ou **gráfica**. Um modelo de dados pode ser representado de várias formas, conhecidas como "esquema de banco de dados". O modelo deve respeitar o nível de conhecimento dos usuários que irá atender. Para o usuário final, o modelo não deve conter detalhes técnicos de implementação, que são necessários apenas para usuários mais avançados do sistema.
 
+**Exemplo:**
+```
+Forma Textual:
+  CLIENTE (id_cliente, nm_cliente, email, telefone)
+  PEDIDO (id_pedido, dt_pedido, vl_total, id_cliente)
+
+Forma Gráfica:
+  ┌─────────────┐         ┌─────────────┐
+  │   CLIENTE   │─────────│   PEDIDO    │
+  └─────────────┘         └─────────────┘
+```
+
 ## Banco de Dados
 
 Conjunto de registros (dados) organizados em tabelas, permitindo o armazenamento e a produção de informações. Um banco de dados normalmente agrupa registros com o mesmo objetivo e é mantido e acessado por meio de um software chamado **SGBD** (Sistema de Gerenciamento de Banco de Dados), que auxilia na administração das bases de dados.
 
+**Exemplo:**
+```
+Banco de Dados: LOJA_VIRTUAL
+├── Tabela: CLIENTE
+├── Tabela: PRODUTO
+├── Tabela: PEDIDO
+└── Tabela: ITEM_PEDIDO
+```
+
 ## Modelo de Dados
 
 Descrição dos tipos de informações que estão armazenadas em um banco de dados.
+
+**Exemplo:**
+```
+Modelo de uma Biblioteca:
+- LIVRO: título, autor, ISBN, ano_publicacao
+- USUARIO: nome, cpf, email, data_cadastro
+- EMPRESTIMO: data_emprestimo, data_devolucao, status
+```
 
 ## Modelo Conceitual
 
@@ -87,6 +128,16 @@ Registra **que dados podem aparecer** no banco de dados, mas **não registra com
 - **Independente de SGBD específico**
 - **Foco na estrutura lógica dos dados**
 
+**Exemplo:**
+```
+FUNCIONARIO
+├── id_funcionario (PK, INTEGER)
+├── nm_funcionario (VARCHAR, NOT NULL)
+├── dt_nascimento (DATE)
+├── vl_salario (DECIMAL)
+└── id_departamento (FK → DEPARTAMENTO)
+```
+
 ## Modelo Físico
 
 No modelo físico fazemos a **modelagem física** do modelo de banco de dados. Levam-se em conta as limitações impostas pelo SGBD escolhido e deve ser criado sempre com base nos exemplos de modelagem de dados produzidos no item anterior (modelo lógico).
@@ -96,4 +147,18 @@ No modelo físico fazemos a **modelagem física** do modelo de banco de dados. L
 - **Considera limitações técnicas**
 - **Implementação real do banco**
 - **Otimizações específicas da plataforma**
+
+**Exemplo (MySQL):**
+```sql
+CREATE TABLE FUNCIONARIO (
+    id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
+    nm_funcionario VARCHAR(100) NOT NULL,
+    dt_nascimento DATE,
+    vl_salario DECIMAL(10,2),
+    id_departamento INT,
+    FOREIGN KEY (id_departamento) REFERENCES DEPARTAMENTO(id_departamento)
+) ENGINE=InnoDB;
+
+CREATE INDEX idx_nome ON FUNCIONARIO(nm_funcionario);
+```
 

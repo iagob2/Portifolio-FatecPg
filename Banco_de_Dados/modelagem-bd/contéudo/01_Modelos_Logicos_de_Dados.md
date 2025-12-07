@@ -17,11 +17,22 @@ Uma característica fundamental do modelo lógico é **evitar redundância**: ca
   - Sem cedilha ou acento
   - Palavras compostas separadas por underline (`_`)
 
+**Exemplo:**
+```
+FUNCIONARIO, CLIENTE, PRODUTO, PEDIDO_VENDA, CONTA_BANCARIA
+```
+
 ---
 
 ## Entidade Associativa
 
 - Não existe isoladamente no MER; depende de duas ou mais entidades.
+
+**Exemplo:**
+```
+MATRICULA (depende de ALUNO e DISCIPLINA)
+ITEM_PEDIDO (depende de PEDIDO e PRODUTO)
+```
 
 ---
 
@@ -29,11 +40,25 @@ Uma característica fundamental do modelo lógico é **evitar redundância**: ca
 
 - Representa a relação entre superclasse (entidade principal) e subclasse.
 
+**Exemplo:**
+```
+Superclasse: PESSOA
+Subclasses: PESSOA_FISICA, PESSOA_JURIDICA
+```
+
 ---
 
 ## Tupla
 
 - Conjunto ordenado de atributos (linha de uma tabela).
+
+**Exemplo:**
+```
+| id | nm_funcionario | dt_nascimento |
+|----|----------------|---------------|
+| 1  | João Silva     | 1990-05-15    |  ← Esta linha é uma tupla
+| 2  | Maria Santos   | 1985-08-22    |  ← Esta linha é outra tupla
+```
 
 ---
 
@@ -41,11 +66,23 @@ Uma característica fundamental do modelo lógico é **evitar redundância**: ca
 
 - Registro de uma entidade em determinado momento.
 
+**Exemplo:**
+```
+Entidade: CLIENTE
+Instância: { id: 1, nm_cliente: "João Silva", email: "joao@email.com" }
+```
+
 ---
 
 ## Atributo
 
 - Propriedade ou característica de uma entidade, associada e armazenada no sistema.
+
+**Exemplo:**
+```
+Entidade: FUNCIONARIO
+Atributos: id_funcionario, nm_funcionario, dt_nascimento, vl_salario, cd_departamento
+```
 
 ---
 
@@ -53,11 +90,25 @@ Uma característica fundamental do modelo lógico é **evitar redundância**: ca
 
 - Associação entre entidades, representada por uma linha unindo os objetos.
 
+**Exemplo:**
+```
+CLIENTE ───────── realiza ───────── PEDIDO
+   │                                   │
+   └── Um cliente realiza vários pedidos
+```
+
 ---
 
 ## Dado
 
 - Informação atômica sobre um objeto tratada pelo sistema.
+
+**Exemplo:**
+```
+"João Silva" → dado do atributo nm_funcionario
+"1990-05-15" → dado do atributo dt_nascimento
+"3500.00"    → dado do atributo vl_salario
+```
 
 ---
 

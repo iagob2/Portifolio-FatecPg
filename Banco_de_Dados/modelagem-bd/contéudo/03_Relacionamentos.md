@@ -1,8 +1,19 @@
 # Relacionamentos 
 
+Relacionamentos definem como as entidades se conectam entre si no banco de dados. Existem três tipos principais de cardinalidade.
+
 ## Relacionamento 1:1 (Um para Um)
 
 Um relacionamento de um para um existe entre duas tabelas (entidades) quando um único registro da primeira tabela está relacionado a um único registro da segunda tabela e vice-versa. São bastante difíceis de serem caracterizados, pois qualquer mudança de interpretação ou versão pode fazer com que facilmente eles sejam questionados e até reconsiderados.
+
+**Exemplo do mundo real:**
+```
+- Uma PESSOA tem um único CPF
+- Um CPF pertence a uma única PESSOA
+
+- Um PAÍS tem uma única CAPITAL
+- Uma CAPITAL pertence a um único PAÍS
+```
 
 ### Características:
 - **Raridade:** Relacionamentos 1:1 são pouco comuns
@@ -27,6 +38,18 @@ No relacionamento do tipo 1:1, quem determina qual é a entidade forte (pai) é 
 ## Relacionamento 1:N (Um para Muitos)
 
 Gera um atributo estrangeiro que é o elo de ligação entre duas instâncias. É sua existência que indica que há um relacionamento da instância de um objeto com outra instância de outro objeto, ou de maneira simples, indica que há um relacionamento entre dois objetos. O objeto dependente (filho) herda a chave do objeto de origem (pai) como atributo estrangeiro.
+
+**Exemplo do mundo real:**
+```
+- Uma MÃE pode ter vários FILHOS
+- Um FILHO tem apenas uma MÃE biológica
+
+- Um PROFESSOR leciona várias TURMAS
+- Uma TURMA é lecionada por um PROFESSOR
+
+- Um DEPARTAMENTO possui vários FUNCIONÁRIOS
+- Um FUNCIONÁRIO pertence a um DEPARTAMENTO
+```
 
 ### Características:
 - **Mais comum:** Relacionamento mais frequente
@@ -53,6 +76,18 @@ Chamamos de **navegação** no modelo de dados a criação do atributo estrangei
 ## Relacionamento N:N (Muitos para Muitos)
 
 Esta cardinalidade **não gera atributos ou chaves estrangeiras** diretamente, mas é necessário haver a navegação. É possível a resolução deste relacionamento. Este tipo de relacionamento **desaparece** e em seu lugar surge um **objeto de resolução**.
+
+**Exemplo do mundo real:**
+```
+- Um ALUNO pode cursar várias DISCIPLINAS
+- Uma DISCIPLINA pode ser cursada por vários ALUNOS
+
+- Um AUTOR pode escrever vários LIVROS
+- Um LIVRO pode ser escrito por vários AUTORES
+
+- Um MÉDICO pode atender vários PACIENTES
+- Um PACIENTE pode ser atendido por vários MÉDICOS
+```
 
 ### Características:
 - **Complexidade:** Requer tabela intermediária
