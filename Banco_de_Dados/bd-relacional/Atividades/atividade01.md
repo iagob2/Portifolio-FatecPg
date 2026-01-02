@@ -6,7 +6,7 @@ Este repositório contém o exercício de modelagem de dados para um sistema de 
 
 Abaixo está a representação visual do relacionamento entre as entidades:
 
-![Diagrama do Banco de Dados](imagens/bd_01.png)
+![Diagrama do Banco de Dados](imagens_diagmas/bd_01.png)
 
 > **Nota:** O diagrama ilustra o relacionamento **Muitos-para-Muitos** entre *Ordem de Serviço* e *Materiais*, resolvido através da tabela associativa `SERVICO_MATERIA`.
 
