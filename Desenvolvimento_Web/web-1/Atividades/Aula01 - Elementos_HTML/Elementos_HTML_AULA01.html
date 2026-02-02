@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manual interativo de elementos HTML5 para aprendizado básico">
+    <title>Elementos HTML - Aula 01</title>
+
+    <style>
+        /* ============================================
+           RESET E VARIÁVEIS CSS (Design System)
+           ============================================ */
+        :root {
+            --cor-primaria: #2c3e50;
+            --cor-secundaria: #3498db;
+            --cor-destaque: #e74c3c;
+            --cor-texto: #2c3e50;
+            --cor-texto-claro: #7f8c8d;
+            --cor-fundo: #ffffff;
+            --cor-fundo-claro: #f8f9fa;
+            --cor-fundo-nav: #34495e;
+            --cor-fundo-nav-hover: #2c3e50;
+            --cor-borda: #e0e0e0;
+            --cor-sombra: rgba(0, 0, 0, 0.1);
+            --espacamento-xs: 0.5rem;
+            --espacamento-sm: 1rem;
+            --espacamento-md: 1.5rem;
+            --espacamento-lg: 2rem;
+            --espacamento-xl: 3rem;
+            --raio-borda: 8px;
+            --transicao: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ============================================
+           TIPOGRAFIA
+           ============================================ */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--cor-primaria);
+            font-size: 2.5rem;
+            margin: var(--espacamento-lg) 0;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: var(--cor-primaria);
+            font-size: 2rem;
+            margin-top: var(--espacamento-xl);
+            margin-bottom: var(--espacamento-md);
+            font-weight: 600;
+            border-bottom: 3px solid var(--cor-secundaria);
+            padding-bottom: var(--espacamento-xs);
+        }
+
+        h3 {
+            color: var(--cor-primaria);
+            font-size: 1.5rem;
+            margin-top: var(--espacamento-lg);
+            margin-bottom: var(--espacamento-sm);
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--cor-primaria);
+            font-size: 1.25rem;
+            margin-top: var(--espacamento-md);
+            margin-bottom: var(--espacamento-sm);
+            font-weight: 600;
+        }
+
+        h5 {
+            color: var(--cor-primaria);
+            font-size: 1.1rem;
+            margin-top: var(--espacamento-md);
+            margin-bottom: var(--espacamento-xs);
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--cor-texto);
+            margin-bottom: var(--espacamento-sm);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           NAVEGAÇÃO LATERAL
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--cor-fundo-nav) 0%, var(--cor-fundo-nav-hover) 100%);
+            color: #fff;
+            padding: var(--espacamento-lg) var(--espacamento-sm);
+            overflow-y: auto;
+            box-shadow: 2px 0 10px var(--cor-sombra);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            margin-bottom: var(--espacamento-xs);
+        }
+
+        nav li a {
+            display: block;
+            padding: var(--espacamento-sm);
+            color: #ecf0f1;
+            text-decoration: none;
+            border-radius: var(--raio-borda);
+            transition: var(--transicao);
+            font-weight: 500;
+        }
+
+        nav li a:hover,
+        nav li a:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           CONTEÚDO PRINCIPAL
+           ============================================ */
+        #content {
+            margin-left: 250px;
+            padding: var(--espacamento-lg);
+            max-width: 1200px;
+        }
+
+        .creditos {
+            text-align: center;
+            color: var(--cor-texto-claro);
+            font-style: italic;
+            margin-bottom: var(--espacamento-xl);
+            padding-bottom: var(--espacamento-md);
+            border-bottom: 2px solid var(--cor-borda);
+        }
+
+        /* ============================================
+           PLAYGROUND (Editor + Visualização)
+           ============================================ */
+        .playground-container {
+            display: flex;
+            gap: var(--espacamento-md);
+            padding: var(--espacamento-md);
+            background: var(--cor-fundo-claro);
+            margin: var(--espacamento-lg) 0;
+            border-radius: var(--raio-borda);
+            box-shadow: 0 2px 8px var(--cor-sombra);
+            flex-wrap: wrap;
+        }
+
+        .editor-codigo {
+            flex: 1;
+            min-width: 300px;
+            min-height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            border: 2px solid var(--cor-borda);
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: var(--espacamento-md);
+            border-radius: var(--raio-borda);
+            resize: vertical;
+            transition: var(--transicao);
+        }
+
+        .editor-codigo:focus {
+            outline: none;
+            border-color: var(--cor-secundaria);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .visualizacao-resultado {
+            flex: 1;
+            min-width: 300px;
+            min-height: 300px;
+            border: 2px solid var(--cor-borda);
+            background: var(--cor-fundo);
+            border-radius: var(--raio-borda);
+            box-shadow: inset 0 2px 4px var(--cor-sombra);
+        }
+
+        /* ============================================
+           LISTAS E ELEMENTOS
+           ============================================ */
+        ul,
+        ol {
+            margin-left: var(--espacamento-lg);
+            margin-bottom: var(--espacamento-md);
+        }
+
+
+
+        li {
+            margin-bottom: var(--espacamento-xs);
+            line-height: 1.8;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: var(--cor-destaque);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            margin-left: 250px;
+            padding: var(--espacamento-xl);
+            border-top: 2px solid var(--cor-borda);
+            background-color: var(--cor-fundo-claro);
+            margin-top: var(--espacamento-xl);
+        }
+
+        footer p {
+            text-align: center;
+            font-size: 0.95em;
+            color: var(--cor-texto-claro);
+            line-height: 1.8;
+        }
+
+        .footer-link {
+            color: var(--cor-secundaria);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transicao);
+        }
+
+        .footer-link:hover {
+            color: var(--cor-destaque);
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 768px) {
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                max-height: 300px;
+            }
+
+            #content {
+                margin-left: 0;
+                padding: var(--espacamento-md);
+            }
+
+            footer {
+                margin-left: 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .playground-container {
+                flex-direction: column;
+            }
+
+            .editor-codigo,
+            .visualizacao-resultado {
+                min-width: 100%;
+            }
+        }
+
+        /* ============================================
+           MELHORIAS DE ACESSIBILIDADE
+           ============================================ */
+        a:focus,
+        button:focus {
+            outline: 3px solid var(--cor-secundaria);
+            outline-offset: 2px;
+        }
+
+        /* Scrollbar personalizada para navegação */
+        nav::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        nav::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <nav role="navigation" aria-label="Navegação principal">
+        <ul>
+            <li><a href="#introducao" class="link">Introdução e Estrutura Básica</a></li>
+            <li><a href="#titulos" class="link">Títulos e Parágrafos</a></li>
+            <li><a href="#formatos" class="link">Formatos de Texto</a></li>
+            <li><a href="#midias" class="link">Mídias e Hiperlinks</a></li>
+            <li><a href="#listas" class="link">Listas e Itens</a></li>
+            <li><a href="#tabelas" class="link">Tabelas Avançadas</a></li>
+            <li><a href="#formularios" class="link">Formulários Completos</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Manual Interativo de Elementos HTML5: Básico</h1>
+        <p class="creditos">Desenvolvido por Iago Correia | Baseado nos estudos de Desenvolvimento Web</p>
+    </header>
+
+    <main id="content">
+        <section id="introducao">
+            <h2>Introdução e Estrutura Básica</h2>
+            <p>
+                O <strong>HTML</strong> (Hyper Text Markup Language) é a linguagem de marcação padrão utilizada para
+                criar páginas da Web.
+                A linguagem descreve a estrutura de uma página e consiste em uma série de elementos que informam ao
+                navegador como exibir o conteúdo.
+                Esses elementos são definidos por uma tag inicial, o conteúdo e uma tag final, como no exemplo:
+                <code>&lt;tagname&gt;Conteúdo&lt;/tagname&gt;</code>
+            </p>
+
+            <h3>Estrutura Básica</h3>
+            <p>Salve em formato .HTML ou .html e abra no navegador.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <h1>Título</h1>
+    <p>Parágrafo</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Estrutura Básica - Elementos</h3>
+            <ul>
+                <li>
+                    <p><strong>&lt;!DOCTYPE html&gt;</strong> define que este documento é um documento HTML5.</p>
+                </li>
+                <li>
+                    <p><strong>&lt;html&gt;</strong> elemento raiz de uma página HTML.</p>
+                </li>
+                <li>
+                    <p><strong>&lt;head&gt;</strong> elemento que contém meta informações sobre a página HTML.</p>
+                </li>
+                <li>
+                    <p><strong>&lt;title&gt;</strong> elemento que especifica um título para a página HTML (que é
+                        mostrado na barra de título do navegador ou na guia da página).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;body&gt;</strong> elemento que define o corpo do documento e é um recipiente para
+                        todos os conteúdos visíveis, como cabeçalhos, parágrafos, imagens, etc.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>O que é um Elemento HTML?</h3>
+            <p>Um elemento HTML é a estrutura básica de uma página HTML. Ele é usado para marcar e organizar o conteúdo
+                que aparece no site, como textos, imagens, links, listas, botões etc. É definido por uma tag inicial,
+                algum conteúdo e uma tag final.</p>
+            <p><strong>&lt;tagname&gt;</strong> O conteúdo vai aqui...<strong>&lt;/tagname&gt;</strong></p>
+
+            <h3>O que são Atributos HTML?</h3>
+            <p>São como as características ou configurações das tags. Eles fornecem as informações adicionais que o
+                elemento precisa para funcionar corretamente.</p>
+            <p>Os 4 pontos principais:</p>
+            <ol>
+                <li>
+                    <p><strong>Universalidade:</strong> Todo elemento HTML pode receber atributos.</p>
+                </li>
+                <li>
+                    <p><strong>Função:</strong> Eles dizem como o elemento deve agir (ex: a tag &lt;img&gt; precisa do
+                        atributo src para saber qual foto carregar).</p>
+                </li>
+                <li>
+                    <p><strong>Onde colocar:</strong> Sempre na tag de abertura (a primeira). Nunca na de fechamento.
+                    </p>
+                </li>
+                <li>
+                    <p><strong>Estrutura:</strong> Quase sempre vêm em pares de nome="valor".</p>
+                </li>
+            </ol>
+
+            <h3>O atributo lang</h3>
+            <p>Você deve sempre incluir o atributo <strong>lang="pt-br"</strong> dentro da tag &lt;html&gt; para
+                declarar o idioma da página da Web. Isso se destina a ajudar os motores de busca e navegadores.</p>
+            <p>O exemplo a seguir especifica o português como o idioma:</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <h1>Título</h1>
+    <p>Parágrafo</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="titulos">
+            <h2>Cabeçalhos (&lt;h1&gt; a &lt;h6&gt;)</h2>
+            <p><strong>O que é:</strong> São elementos usados para criar títulos ou subtítulos e organizar a hierarquia
+                do conteúdo.</p>
+            <p><strong>Como funciona:</strong> Os títulos são organizados em 6 níveis, indo de &lt;h1&gt; a &lt;h6&gt;.
+                O &lt;h1&gt; é o mais importante, e a importância diminui sucessivamente nos níveis seguintes, até
+                chegar ao &lt;h6&gt;, que é o de menor relevância.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <h1>TÍTULO 01</h1>
+    <h2>TÍTULO 02</h2>
+    <h3>TÍTULO 03</h3>
+    <h4>TÍTULO 04</h4>
+    <h5>TÍTULO 05</h5>
+    <h6>TÍTULO 06</h6>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h2>Títulos e Parágrafos</h2>
+
+            <h3>Parágrafos (&lt;p&gt; ... &lt;/p&gt;)</h3>
+            <p><strong>O que é:</strong> O elemento &lt;p&gt; define um parágrafo. Ele serve para estruturar blocos de
+                texto e organizar o conteúdo do seu site.</p>
+            <p><strong>Como funciona:</strong> O parágrafo sempre começa em uma linha nova (nunca na continuação da
+                anterior). O navegador adiciona automaticamente uma margem (espaço em branco) antes e depois dele, para
+                separar o texto dos outros elementos.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <p>Este é um parágrafo</p>
+    <p>Este é outro parágrafo</p>
+    <p>Este é mais um parágrafo</p>
+    <p>Este é o último parágrafo</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Linha horizontal (&lt;hr&gt;)</h3>
+            <p>A tag &lt;hr&gt; define uma linha horizontal. Normalmente usada para separar o conteúdo.</p>
+            <p>A tag &lt;hr&gt; é uma tag vazia, o que significa que não tem tag final.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <p>Linha horizontal</p>
+    <hr>
+    <p>Linha horizontal</p>
+    <hr>
+    <p>Linha horizontal</p>
+    <hr>
+    <p>Linha horizontal</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Quebras de Linha (&lt;br&gt;)</h3>
+            <p>O elemento &lt;br&gt; define uma quebra de linha. Nós usamos quando queremos uma quebra de linha sem
+                iniciar um novo parágrafo.</p>
+            <p>A tag &lt;br&gt; é uma tag vazia, o que significa que não tem tag final.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da Página</title>
+</head>
+
+<body>
+    <p>Este é um parágrafo</p>
+    
+    <p>Este é outro parágrafo</p>
+    
+    <p>Este é um parágrafo<br>Ainda estamos no mesmo parágrafo</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="formatos">
+            <h2>Formatos de Texto</h2>
+            <p><strong>O que são:</strong> São elementos usados para destacar partes do texto ou dar a ele um
+                significado visual especial, sem precisar de estilos complexos.</p>
+
+            <h3>Os principais</h3>
+            <ul>
+                <li>
+                    <p><strong>&lt;b&gt;</strong> ou <strong>&lt;strong&gt;</strong>: Deixam o texto em negrito (texto
+                        importante).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;i&gt;</strong> ou <strong>&lt;em&gt;</strong>: Deixam o texto em itálico (texto
+                        enfatizado).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;mark&gt;</strong>: Marca o texto com um fundo amarelo (como um marca-texto).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;small&gt;</strong>: Exibe o texto um pouco menor que o normal.</p>
+                </li>
+                <li>
+                    <p><strong>&lt;del&gt;</strong>: Risca o texto (usado para indicar algo deletado ou corrigido).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;ins&gt;</strong>: Sublinha o texto (usado para indicar algo inserido).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;sub&gt;</strong>: Define texto subscrito (aparece abaixo da linha normal).</p>
+                </li>
+                <li>
+                    <p><strong>&lt;sup&gt;</strong>: Define texto sobrescrito (aparece acima da linha normal).</p>
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Elementos de formatação</title>
+</head>
+
+<body>
+    <p>Texto em <b>negrito</b></p>
+    <p>Texto <strong>importante</strong></p>
+    <p>Texto em <i>itálico</i></p>
+    <p>Texto <em>enfatizado</em></p>
+    <p>Texto <mark>marcado</mark></p>
+    <p>Texto <small>menor</small></p>
+    <p>Texto <del>deletado</del></p>
+    <p>Texto <ins>inserido</ins></p>
+    <p>Texto <sub>subscrito</sub></p>
+    <p>Texto <sup>sobrescrito</sup></p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="midias">
+            <h2>Mídias e Hiperlinks</h2>
+
+            <h3>Imagens</h3>
+            <p>A tag &lt;img&gt; é usada para incorporar imagens em uma página web. Tecnicamente, as imagens não são
+                inseridas no código, mas sim vinculadas a ele. A tag funciona criando um espaço reservado onde a imagem
+                aparecerá. Ela é uma tag vazia, ou seja, contém apenas atributos e não possui tag de fechamento.</p>
+
+            <p>A tag &lt;img&gt; tem dois atributos obrigatórios:</p>
+            <ul>
+                <li>O atributo <strong>src</strong> - Especifica o caminho para a imagem, pode estar online ou em um
+                    diretório do projeto.</li>
+                <li>O atributo <strong>alt</strong> fornece uma descrição textual para a imagem. Esse texto aparece caso
+                    a imagem não carregue e é fundamental para a acessibilidade (usado por leitores de tela para cegos).
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Imagens</title>
+</head>
+
+<body>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHE8CZT4pYNZr813K87DrswQawc3DGPU95uhwuAbQvxhS4nfpkWy5251cjSiOoLq22Sc&usqp=CAU" alt="Logo HTML5">
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Largura e Altura das imagens (Width e Height)</h4>
+            <p>Os atributos <strong>width</strong> e <strong>height</strong> definem as dimensões (largura e altura) da
+                imagem em pixels. No entanto, sugerimos sempre o uso do atributo <strong>style</strong>. Isso impede que
+                folhas de estilo externas (CSS) anulem essas medidas, garantindo que a imagem permaneça exatamente com o
+                tamanho e a proporção que você definiu.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Imagens</title>
+</head>
+
+<body>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHE8CZT4pYNZr813K87DrswQawc3DGPU95uhwuAbQvxhS4nfpkWy5251cjSiOoLq22Sc&usqp=CAU" alt="HTML5">
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHE8CZT4pYNZr813K87DrswQawc3DGPU95uhwuAbQvxhS4nfpkWy5251cjSiOoLq22Sc&usqp=CAU" alt="HTML5" width="50%" height="50%">
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHE8CZT4pYNZr813K87DrswQawc3DGPU95uhwuAbQvxhS4nfpkWy5251cjSiOoLq22Sc&usqp=CAU" alt="HTML5" width="20%" height="20%">
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Favicon</h3>
+            <p>Um favicon é uma pequena imagem exibida ao lado do título da página na guia do navegador. Usamos o
+                elemento &lt;link&gt; para inserir um favicon, após o elemento &lt;title&gt;.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Favicon</title>
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHE8CZT4pYNZr813K87DrswQawc3DGPU95uhwuAbQvxhS4nfpkWy5251cjSiOoLq22Sc&usqp=CAU">
+</head>
+
+<body>
+    <p>O favicon fica na guia do navegador.</p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Links (Hiperligações)</h3>
+            <p>A tag <strong>&lt;a&gt;</strong> define um hiperlink, usado para conectar uma página a outra. O atributo
+                mais importante é o <strong>href</strong>, que indica o destino do link (o endereço URL para onde o
+                usuário será levado).</p>
+
+            <h4>Links - atributo target</h4>
+            <p>O atributo target especifica onde abrir o documento vinculado. Seus valores são:</p>
+            <ul>
+                <li>
+                    <p><strong>_self:</strong> Padrão. Abre o documento na mesma janela ou guia em que foi clicado.</p>
+                </li>
+                <li>
+                    <p><strong>_blank:</strong> Abre o documento em uma nova janela ou guia.</p>
+                </li>
+                <li>
+                    <p><strong>_parent:</strong> Abre o documento no quadro pai.</p>
+                </li>
+                <li>
+                    <p><strong>_top:</strong> Abre o documento em todo o corpo da janela.</p>
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Links (Hiperligações)</title>
+</head>
+
+<body>
+    <p>1. Link comum (abre na mesma janela):<br>
+        <a href="https://www.google.com">Visitar o Google</a>
+    </p>
+
+    <p>2. Link para nova aba (usando target="_blank"):<br>
+        <a href="https://www.google.com" target="_blank">Visitar o Google em Nova Aba</a>
+    </p>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="listas">
+            <h2>Listas e Itens</h2>
+            <p>As listas permitem agrupar um conjunto de itens relacionados entre si. Elas servem para organizar
+                informações, criar menus de navegação ou listar tópicos, deixando o conteúdo muito mais estruturado e
+                fácil de ler do que um texto corrido.</p>
+
+            <h4>Lista Não Ordenada</h4>
+            <p>Uma lista não ordenada começa com a tag <strong>&lt;ul&gt;</strong>. Cada item da lista deve iniciar com
+                a tag <strong>&lt;li&gt;</strong>. Por padrão, os itens dessa lista são marcados com pequenas bolinhas.
+            </p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista Não Ordenada</title>
+</head>
+
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Lista Não Ordenada - atributo type</h4>
+            <p>O atributo type da tag &lt;ul&gt; define o estilo do marcador de item da lista. Pode ter um dos seguintes
+                valores:</p>
+            <ul>
+                <li>
+                    <p><strong>disc:</strong> marcador padrão</p>
+                </li>
+                <li>
+                    <p><strong>circle:</strong> círculo</p>
+                </li>
+                <li>
+                    <p><strong>square:</strong> quadrado</p>
+                </li>
+                <li>
+                    <p><strong>none:</strong> sem marcador</p>
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista Não Ordenada - atributo type</title>
+</head>
+
+<body>
+    <p>Padrão</p>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+
+    <p>Círculo</p>
+    <ul type="circle">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+
+    <p>Quadrado</p>
+    <ul type="square">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+
+    <p>None</p>
+    <ul type="none">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ul>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Lista Ordenada</h3>
+            <p>Uma lista ordenada começa com a tag &lt;ol&gt;. Cada item da lista começa com a tag &lt;li&gt;. Ela é
+                usada quando a ordem dos itens é importante, como em um passo a passo ou ranking.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista Ordenada</title>
+</head>
+
+<body>
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Lista Ordenada - atributo type</h4>
+            <p>O atributo type da tag &lt;ol&gt; define o tipo de marcador do item da lista:</p>
+            <ul>
+                <li>
+                    <p><strong>type="1"</strong> números (padrão)</p>
+                </li>
+                <li>
+                    <p><strong>type="A"</strong> letras maiúsculas</p>
+                </li>
+                <li>
+                    <p><strong>type="a"</strong> letras minúsculas</p>
+                </li>
+                <li>
+                    <p><strong>type="I"</strong> números romanos maiúsculos</p>
+                </li>
+                <li>
+                    <p><strong>type="i"</strong> números romanos minúsculos</p>
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista Ordenada - atributo type</title>
+</head>
+
+<body>
+    <p>Padrão</p>
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+
+    <p><strong>type="A"</strong></p>
+    <ol type="A">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+
+    <p><strong>type="a"</strong></p>
+    <ol type="a">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+
+    <p><strong>type="I"</strong></p>
+    <ol type="I">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+
+    <p><strong>type="i"</strong></p>
+    <ol type="i">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JAVASCRIPT</li>
+    </ol>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Lista de Descrição</h3>
+            <p>Uma lista de descrição é uma lista de termos, com uma descrição de cada termo.</p>
+            <ul>
+                <li>
+                    <p>A tag <strong>&lt;dl&gt;</strong> define a lista de descrição</p>
+                </li>
+                <li>
+                    <p>A tag <strong>&lt;dt&gt;</strong> define o termo (nome)</p>
+                </li>
+                <li>
+                    <p>A tag <strong>&lt;dd&gt;</strong> define a descrição de cada termo</p>
+                </li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Lista de Descrição</title>
+</head>
+
+<body>
+    <dl>
+        <dt>HTML</dt>
+        <dd>Linguagem de marcação para estruturar conteúdo web</dd>
+
+        <dt>CSS</dt>
+        <dd>Linguagem de estilo para formatar páginas web</dd>
+
+        <dt>JavaScript</dt>
+        <dd>Linguagem de programação para adicionar interatividade</dd>
+    </dl>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="tabelas">
+            <h2>Tabelas Avançadas</h2>
+            <p>As tabelas permitem organizar os dados em linhas e colunas, servem exclusivamente para dados tabulares,
+                ou seja, informações que precisam de linhas e colunas para fazerem sentido. <strong>Atenção:</strong>
+                Use tabelas apenas para exibir informações tabulares (como listas de preços, horários ou estatísticas) e
+                nunca para criar o design ou o layout da página.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Tabelas</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Preço</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Notebook</td>
+            <td>R$ 3.560,00</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <ul>
+                <li><strong>&lt;table&gt; &lt;/table&gt;</strong> definição da tabela</li>
+                <li><strong>&lt;th&gt; &lt;/th&gt;</strong> título das colunas</li>
+                <li><strong>&lt;tr&gt; &lt;/tr&gt;</strong> adiciona linhas na tabela</li>
+                <li><strong>&lt;td&gt; &lt;/td&gt;</strong> adiciona dados nas linhas</li>
+            </ul>
+
+            <p>O atributo "border" define a espessura das bordas da tabela e das células</p>
+
+            <h3>Atributo colspan</h3>
+            <p>O atributo "colspan" mescla células por colunas, ou seja, para fazer uma célula abranger várias colunas.
+            </p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Tabelas</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Preço</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Notebook</td>
+            <td>R$ 3.560,00</td>
+        </tr>
+        <tr>
+            <td colspan="3">Total</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Atributo rowspan</h3>
+            <p>O atributo "rowspan" mescla células por linhas, ou seja, para fazer uma célula abranger várias linhas.
+            </p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Tabelas</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th rowspan="2">Código</th>
+            <th>Produto</th>
+            <th>Preço</th>
+        </tr>
+        <tr>
+            <td>Notebook</td>
+            <td>R$ 3.560,00</td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+        </section>
+
+        <section id="formularios">
+            <h2>Formulários Completos</h2>
+            <p>O elemento HTML <strong>&lt;form&gt;</strong> é um <strong>container</strong> (uma área reservada) dentro
+                da página, responsável por agrupar campos de entrada, caixas de seleção e botões, usado para coletar
+                dados digitados pelo usuário, geralmente é enviado a um servidor para processamento.</p>
+            <p>Eles são essenciais para a interação na web, permitindo criar telas de login, cadastros, pesquisas e
+                páginas de contato, enviando essas informações para um servidor.</p>
+
+            <h3>Atributos do Form</h3>
+            <p>O atributo <strong>action</strong> define o <strong>destino</strong> do formulário. É nele que colocamos
+                o endereço (URL) da página ou arquivo que receberá os dados quando o usuário clicar no botão "Enviar".
+            </p>
+            <p>O atributo <strong>method</strong> especifica o método HTTP a ser usado ao enviar os dados do formulário.
+            </p>
+
+            <ul>
+                <li><strong>GET</strong>: É o padrão. Envia os dados visíveis no endereço (URL) do navegador. Não deve
+                    ser usado para senhas.</li>
+                <li><strong>POST</strong>: Envia os dados de forma oculta (no corpo da requisição). É mais seguro e
+                    ideal para dados sensíveis.</li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Nome:</label><br>
+        <input type="text" name="nome"><br><br>
+    
+        <label>Senha:</label><br>
+        <input type="password" name="senha"><br><br>
+    
+        <input type="submit" value="Entrar">
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Os elementos &lt;form&gt;</h3>
+
+            <h4>Label e Input</h4>
+            <p>O &lt;label&gt; define um rótulo para os elementos do form.</p>
+            <p>O &lt;input&gt; pode exibir vários tipos de entrada, dependendo do atributo type.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Campo:</label><br>
+        <input type="text" name="text"><br><br>
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Select e Option</h4>
+            <p>O elemento <strong>&lt;select&gt;</strong> cria uma lista suspensa (dropdown). Dentro dele, usamos a tag
+                <strong>&lt;option&gt;</strong> para definir cada opção que o usuário pode escolher.
+            </p>
+
+            <h5>Diferença entre ID e Name</h5>
+            <p>Para o formulário funcionar bem, o &lt;select&gt; deve ter dois atributos principais:</p>
+            <p><strong>id</strong>: É o identificador único na página. Usado principalmente pelo <strong>CSS</strong>
+                (para estilo) e pelo <strong>JavaScript</strong>.</p>
+            <p><strong>name</strong>: É o identificador do dado. Quando o formulário é enviado, o servidor usa esse nome
+                para saber qual opção foi selecionada.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Cores:</label><br>
+        <select name="cor" id="cor">
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="vermelho">Vermelho</option>
+        </select>
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Size e Multiple no elemento Select</h4>
+            <p>Use o atributo <strong>size</strong> para especificar o número de valores visíveis.</p>
+            <p>Use o atributo <strong>multiple</strong> para permitir que o usuário selecione mais de um valor.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Cores:</label><br>
+        <select name="cor" id="cor" size="2" multiple>
+            <option value="verde">Verde</option>
+            <option value="azul">Azul</option>
+            <option value="vermelho">Vermelho</option>
+        </select>
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Optgroup</h4>
+            <p>O elemento <strong>&lt;optgroup&gt;</strong> é usado para agrupar opções relacionadas dentro de uma lista
+                suspensa (<strong>&lt;select&gt;</strong>).</p>
+            <p>Isso é muito útil em listas longas, pois cria <strong>categorias</strong> visuais (usando o atributo
+                <strong>label</strong>), facilitando a leitura para o usuário.
+            </p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Cores:</label><br>
+        <select name="cor" id="cor">
+            <optgroup label="Primárias">
+                <option value="vermelho">Vermelho</option>
+                <option value="azul">Azul</option>
+                <option value="amarelo">Amarelo</option>
+            </optgroup>
+
+            <optgroup label="Secundárias">
+                <option value="laranja">Laranja</option>
+                <option value="verde">Verde</option>
+                <option value="roxo">Roxo</option>
+            </optgroup>
+        </select>
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h4>Datalist</h4>
+            <p>O elemento <strong>&lt;datalist&gt;</strong> fornece uma lista de opções pré-definidas para um campo
+                <strong>&lt;input&gt;</strong>.
+            </p>
+            <p>Isso cria um recurso de "autocompletar", sugerindo valores enquanto o usuário digita. Para funcionar, o
+                atributo <strong>list</strong> do input deve ser igual ao atributo <strong>id</strong> do datalist.</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <label>Navegador:</label><br>
+        <input type="text" list="browsers" name="navegador">
+        <datalist id="browsers">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+    </form>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+
+
+
+            <h4>Textarea</h4>
+
+            <p>O elemento &lt; textarea&gt; define um campo de entrada de várias linhas </p>
+            <p>O atributo <b> rows </b> especifica o número visível de linhas em uma área de texto</p>
+            <p> O atributo cols especifca a largura visivel de uma área de texto</p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <textarea name="texto" id="" rows="10" cols="30">
+
+        Área de texto!
+        </textarea>
+                </form>
+</body>
+
+</html>
+
+</textarea>
+<iframe class="visualizacao-resultado" title="Visualização do resultado" aria-label="Preview do código HTML"></iframe>
+</div>
+
+
+<h4>Button</h4>
+
+<p>o elemento &lt;button&gt; define um botão clicável</p>
+
+<div class="playground-container">
+    <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+       <button type="button"> Clique aqui!</button>
+    </form>
+    </body>
+
+    </html>
+
+    </textarea>
+    <iframe class="visualizacao-resultado" title="Visualização do resultado"
+        aria-label="Preview do código HTML"></iframe>
+</div>
+
+
+
+<h4>Fieldset e Legend</h4>
+<p> O elemento &lt;fieldset&gt; é usando para agrupar dados relacionados em um formulário</p>
+
+<p> O elemento &lt;legend&gt; define uma legenda para &lt;fieldset&gt;</p>
+
+
+<div class="playground-container">
+    <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Cadstro</legend>
+            <label > Nome:</label>
+        </fieldset>
+    </form>
+    </body>
+
+    </html>
+
+    </textarea>
+    <iframe class="visualizacao-resultado" title="Visualização do resultado"
+        aria-label="Preview do código HTML"></iframe>
+</div>
+
+
+<h4>Tipos de entrada</h4>
+<ul>
+    <li><b>&lt;input type="button"&gt;</b>: Botão clicável (geralmente usado com JavaScript).</li>
+    <li><b>&lt;input type="checkbox"&gt;</b>: Caixa de seleção (permite marcar várias opções).</li>
+    <li><b>&lt;input type="color"&gt;</b>: Seletor de cores (abre uma paleta de cores).</li>
+    <li><b>&lt;input type="date"&gt;</b>: Seletor de data (dia, mês e ano).</li>
+    <li><b>&lt;input type="datetime-local"&gt;</b>: Seletor de data e hora locais.</li>
+    <li><b>&lt;input type="email"&gt;</b>: Campo para e-mail (valida o formato automaticamente).</li>
+    <li><b>&lt;input type="file"&gt;</b>: Botão para selecionar arquivos para upload.</li>
+    <li><b>&lt;input type="hidden"&gt;</b>: Campo oculto (o usuário não vê, mas envia dados).</li>
+    <li><b>&lt;input type="image"&gt;</b>: Usa uma imagem como botão de enviar.</li>
+    <li><b>&lt;input type="month"&gt;</b>: Seletor de mês e ano.</li>
+    <li><b>&lt;input type="week"&gt;</b>: Seletor de semana e ano.</li>
+    <li><b>&lt;input type="number"&gt;</b>: Campo numérico (geralmente exibe setas para aumentar/diminuir).</li>
+    <li><b>&lt;input type="password"&gt;</b>: Campo de senha (esconde os caracteres digitados).</li>
+    <li><b>&lt;input type="radio"&gt;</b>: Botão de opção (permite escolher apenas uma opção no grupo).</li>
+    <li><b>&lt;input type="range"&gt;</b>: Controle deslizante (slider) para selecionar um valor.</li>
+    <li><b>&lt;input type="reset"&gt;</b>: Botão que limpa/reinicia o formulário.</li>
+    <li><b>&lt;input type="search"&gt;</b>: Campo otimizado para digitar termos de busca.</li>
+    <li><b>&lt;input type="submit"&gt;</b>: Botão principal que envia os dados do formulário.</li>
+    <li><b>&lt;input type="tel"&gt;</b>: Campo para telefone (abre teclado numérico no celular).</li>
+    <li><b>&lt;input type="text"&gt;</b>: Campo de texto comum de uma linha (é o padrão).</li>
+    <li><b>&lt;input type="time"&gt;</b>: Seletor de horário (horas e minutos).</li>
+    <li><b>&lt;input type="url"&gt;</b>: Campo para inserir links de sites.</li>
+</ul>
+
+<div class="playground-container">
+    <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+<form action="/enviar-dados" method="POST">
+
+    <h3>Dados Pessoais</h3>
+
+    <label>Texto (Padrão):</label><br>
+    <input type="text" name="nome" placeholder="Seu nome completo"><br><br>
+
+    <label>Senha:</label><br>
+    <input type="password" name="senha"><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" placeholder="exemplo@email.com"><br><br>
+
+    <label>Telefone:</label><br>
+    <input type="tel" name="telefone" placeholder="(99) 99999-9999"><br><br>
+
+    <label>URL (Site):</label><br>
+    <input type="url" name="site" placeholder="https://seusite.com"><br><br>
+
+    <label>Busca:</label><br>
+    <input type="search" name="busca" placeholder="O que procura?"><br><br>
+
+    <h3>Preferências</h3>
+
+    <label>Número (Idade):</label><br>
+    <input type="number" name="idade" min="0" max="120"><br><br>
+
+    <label>Range (Nível de Satisfação):</label><br>
+    <input type="range" name="satisfacao" min="1" max="10"><br><br>
+
+    <label>Cor Favorita:</label><br>
+    <input type="color" name="cor_favorita"><br><br>
+
+    <label>Opções (Checkbox):</label><br>
+    <input type="checkbox" name="newsletter" checked> Quero receber novidades<br><br>
+
+    <label>Gênero (Radio):</label><br>
+    <input type="radio" name="genero" value="M"> Masc
+    <input type="radio" name="genero" value="F"> Fem<br><br>
+
+    <h3>Datas</h3>
+
+    <label>Data:</label>
+    <input type="date" name="data_nasc"><br><br>
+
+    <label>Hora:</label>
+    <input type="time" name="hora_agendada"><br><br>
+
+    <label>Data e Hora Local:</label>
+    <input type="datetime-local" name="reuniao"><br><br>
+
+    <label>Mês:</label>
+    <input type="month" name="mes_ferias"><br><br>
+
+    <label>Semana:</label>
+    <input type="week" name="semana_prova"><br><br>
+
+    <h3>Outros</h3>
+
+    <label>Arquivo:</label><br>
+    <input type="file" name="documento"><br><br>
+
+    <input type="hidden" name="id_usuario" value="12345">
+
+    <h3>Botões</h3>
+
+    <input type="button" value="Clique Aqui (Alert)" onclick="alert('Funciona!')">
+
+    <input type="reset" value="Limpar Formulário">
+
+    <input type="submit" value="Enviar Dados">
+
+    <br><br>
+    <label>Input Image (Funciona como Submit):</label><br>
+    <input type="image" src="botao-enviar.png" alt="Enviar" width="50">
+
+</form>
+    </body>
+
+    </html>
+
+    </textarea>
+    <iframe class="visualizacao-resultado" title="Visualização do resultado"
+        aria-label="Preview do código HTML"></iframe>
+</div>
+
+
+<h4>Atributos de entrada</h4>
+
+<ul>
+    <li><b>value:</b> especifica um valor inicial para um campo de entrada</li>
+    <li><b>readonly:</b> especifica que um campo de entrada é somente leitura</li>
+    <li><b>disabled</b>especifica que um campo de entrada deve ser desabilitada</li>
+    <li><b>size</b>especifica a largura visivel, em caracteres de um campo de entrada </li>
+    <li><b>maxiength:</b> especifica o número máximo de caracteres permitidos em um campo de entrada</li>
+    <li><b>min e max:</b> especificam os valores minimo e maximo para um campo de entrada</li>
+    <li><b>pattern</b>especifica uma expressão regular com a qual o valor do campo de entrada é verificado quando o
+        formulario é enviado</li>
+    <li><b>placeholder</b>especifica uma dica curta que descreve o valor esperado de um campo de entrada </li>
+    <li><b>required:</b> especifica que um campo de entrada deve ser preenchido antes de enviar o formulario </li>
+    <li><b>autofocus</b> especifica que um campo de entrada deve obter foco automaticamente quando a página for
+        carregada.</li>
+
+
+
+</ul>
+
+
+<div class="playground-container">
+    <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="#" method="post">
+        <input type="text" value="Maria"><br><br>
+        <input type="text" value="Maria" readonly><br><br>
+        <input type="text" size="5"> <br><br>
+        <input type="text" maxlength="8"><br><br>
+        <input type="number" min="1" max="5"><br><br>
+        <input type="text" name="uf" pattern="[A-Za-z]{2}"><br><br>
+        <input type="text" placeholder="Digite aqui"><br><br>
+        <input type="text" required><br><br>
+        <input type="text" autofocus><br><br>
+        <input type="submit">
+    </form>
+    </body>
+
+    </html>
+
+    </textarea>
+    <iframe class="visualizacao-resultado" title="Visualização do resultado"
+        aria-label="Preview do código HTML"></iframe>
+</div>
+
+
+
+</section>
+</main>
+
+<footer>
+    <p>
+        <strong>Créditos de Conteúdo:</strong><br>
+        Material didático desenvolvido pela <strong>Prof. Me. Eulaliane Gonçalves</strong><br>
+        Docente do Ensino Superior na Faculdade de Tecnologia de Praia Grande (FATEC PG).<br>
+        <a href="https://www.linkedin.com/in/eulaliane-gon%C3%A7alves-b9833136a/" target="_blank"
+            rel="noopener noreferrer" class="footer-link">
+            🌐 Conectar no LinkedIn
+        </a>
+    </p>
+</footer>
+
+<script>
+    // Seleciona todos os containers de playground da página
+    const containers = document.querySelectorAll('.playground-container');
+
+    containers.forEach(container => {
+        const editor = container.querySelector('.editor-codigo');
+        const visualizacao = container.querySelector('.visualizacao-resultado');
+
+        function atualizar() {
+            try {
+                const documento = visualizacao.contentDocument;
+                if (documento) {
+                    documento.open();
+                    documento.write(editor.value);
+                    documento.close();
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar preview:', error);
+            }
+        }
+
+        // Atualiza quando digitar
+        editor.addEventListener('input', atualizar);
+
+        // Inicia o conteúdo ao carregar a página
+        atualizar();
+    });
+</script>
+</body>
+
+</html>
