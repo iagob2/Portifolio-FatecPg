@@ -9,9 +9,10 @@ Este diretório contém o material prático e interativo da **Aula 01 - Elemento
 O material teórico completo da aula está disponível em formato PDF no diretório:
 ```
 ../Conteúdo/Aula 01 - Elementos HTML.pdf
+../Conteúdo/html-elementos-semanticos.pdf
 ```
 
-Este PDF contém toda a teoria e explicações sobre os elementos HTML básicos, servindo como material de estudo e referência.
+Estes PDFs contêm toda a teoria e explicações sobre os elementos HTML básicos e elementos semânticos, servindo como material de estudo e referência.
 
 ## 📁 Conteúdo deste Diretório
 
@@ -29,7 +30,7 @@ A aplicação inclui:
 
 - ✅ Manual interativo com exemplos práticos
 - ✅ Playground de código HTML com preview em tempo real
-- ✅ Navegação por seções (Títulos, Parágrafos, Formatação, Mídias, Listas, Tabelas, Formulários)
+- ✅ Navegação por seções (Títulos, Parágrafos, Formatação, Mídias, Listas, Tabelas, Formulários, Elementos Semânticos)
 - ✅ Busca de seções
 - ✅ Modo claro/escuro
 - ✅ Suporte para PWA (instalável como app)
@@ -54,6 +55,7 @@ Na pasta `Atividades` também existe o arquivo **`Elementos_HTML_AULA01.html`**,
 - Listas (Ordenadas, Não Ordenadas, de Descrição)
 - Tabelas Avançadas
 - Formulários Completos
+- DIV e Elementos Semânticos (header, nav, section, article, aside, footer)
 
 ## 👨‍💻 Desenvolvido por
 

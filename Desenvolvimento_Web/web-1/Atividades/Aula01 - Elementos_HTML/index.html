@@ -25,6 +25,7 @@
             <li><a href="#listas" class="link">Listas e Itens</a></li>
             <li><a href="#tabelas" class="link">Tabelas Avançadas</a></li>
             <li><a href="#formularios" class="link">Formulários Completos</a></li>
+            <li><a href="#semanticos" class="link">DIV e Elementos Semânticos</a></li>
         </ul>
     </nav>
 
@@ -1349,6 +1350,135 @@
         aria-label="Preview do código HTML"></iframe>
 </div>
 </section>
+
+        <section id="semanticos">
+            <h2>DIV e Elementos Semânticos</h2>
+            <p>
+                Muitos sites contêm código HTML como: <code>&lt;div id="nav"&gt;</code>, <code>&lt;div class="header"&gt;</code>, 
+                <code>&lt;div id="footer"&gt;</code> para indicar navegação, cabeçalho e rodapé.
+            </p>
+            <p>
+                Um <strong>elemento semântico</strong> descreve claramente seu significado tanto para o navegador quanto para o desenvolvedor.
+            </p>
+            <ul>
+                <li><strong>Exemplos de elementos não semânticos:</strong> <code>&lt;div&gt;</code> e <code>&lt;span&gt;</code> - Não diz nada sobre seu conteúdo.</li>
+                <li><strong>Exemplos de elementos semânticos:</strong> <code>&lt;form&gt;</code>, <code>&lt;table&gt;</code>, e <code>&lt;article&gt;</code> - Define claramente seu conteúdo.</li>
+            </ul>
+
+            <h3>Elemento &lt;div&gt;</h3>
+            <p>
+                A tag <code>&lt;div&gt;</code> define uma divisão ou uma seção em um documento HTML.
+                A tag <code>&lt;div&gt;</code> é usada como um contêiner para elementos HTML.
+                Qualquer tipo de conteúdo pode ser colocado dentro da tag <code>&lt;div&gt;</code>.
+                A tag <code>&lt;div&gt;</code> é facilmente estilizada usando o atributo class ou id.
+            </p>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Exemplo com DIV</title>
+</head>
+
+<body>
+    <div id="cabecalho">
+        <h1>Título da Página</h1>
+    </div>
+    <div id="menu">
+        <a href="#">Home</a>
+        <a href="#">Quem somos</a>
+        <a href="#">Contato</a>
+    </div>
+    <div id="conteudo">
+        <h2>Sou um título</h2>
+        <p>Sou um parágrafo</p>
+    </div>
+    <div id="rodape">
+        <p>@Todos os direitos reservados</p>
+    </div>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Elementos Semânticos</h3>
+            <p>Os elementos semânticos HTML5 fornecem significado claro e estrutura para o conteúdo:</p>
+            <ul>
+                <li><strong>&lt;header&gt;</strong> - representa um contêiner para conteúdo introdutório ou um conjunto de links de navegação.</li>
+                <li><strong>&lt;nav&gt;</strong> - define um conjunto de links de navegação.</li>
+                <li><strong>&lt;section&gt;</strong> - define uma seção em um documento.</li>
+                <li><strong>&lt;article&gt;</strong> - especifica conteúdo independente e autossuficiente.</li>
+                <li><strong>&lt;aside&gt;</strong> - define algum conteúdo além do conteúdo em que é colocado (como uma barra lateral).</li>
+                <li><strong>&lt;footer&gt;</strong> - define um rodapé para um documento ou seção.</li>
+            </ul>
+
+            <div class="playground-container">
+                <textarea class="editor-codigo" aria-label="Editor de código HTML">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Elementos Semânticos</title>
+</head>
+
+<body>
+    <header>
+        <h1>Título da Página</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Quem somos</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+    
+    <section>
+        <article>
+            <h2>Sou um título</h2>
+            <p>Sou um parágrafo</p>
+        </article>
+    </section>
+    
+    <aside>
+        <h3>Barra Lateral</h3>
+        <p>Conteúdo adicional aqui</p>
+    </aside>
+    
+    <footer>
+        <p>@Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>
+
+                </textarea>
+                <iframe class="visualizacao-resultado" title="Visualização do resultado"
+                    aria-label="Preview do código HTML"></iframe>
+            </div>
+
+            <h3>Comparação: DIV vs Elementos Semânticos</h3>
+            <p>
+                A principal diferença é que os elementos semânticos fornecem significado ao conteúdo, 
+                facilitando a compreensão tanto para desenvolvedores quanto para mecanismos de busca e 
+                tecnologias assistivas (como leitores de tela).
+            </p>
+            <p>
+                <strong>Vantagens dos elementos semânticos:</strong>
+            </p>
+            <ul>
+                <li>Melhor acessibilidade (screen readers entendem melhor a estrutura)</li>
+                <li>Melhor SEO (mecanismos de busca entendem o conteúdo)</li>
+                <li>Código mais legível e manutenível</li>
+                <li>Estrutura mais clara e organizada</li>
+            </ul>
+        </section>
 </main>
 
 <footer>
